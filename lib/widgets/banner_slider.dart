@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import '../models/banner_item.dart';
 
@@ -20,12 +20,13 @@ class _BannerSliderState extends State<BannerSlider> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        CarouselSlider(
+        FlutterCarousel(
           options: CarouselOptions(
             height: widget.height,
             viewportFraction: 1.0,
             enlargeCenterPage: false,
             autoPlay: true,
+            showIndicator: false,
             onPageChanged: (index, reason) {
               setState(() {
                 _currentIndex = index;
@@ -56,7 +57,9 @@ class _BannerSliderState extends State<BannerSlider> {
                               end: Alignment.bottomCenter,
                               colors: [
                                 Colors.transparent,
-                                Colors.black.withOpacity(0.7),
+                                Colors.black.withAlpha(
+                                  179,
+                                ), // Using withAlpha instead of withOpacity
                               ],
                             ),
                           ),

@@ -41,7 +41,7 @@ class AboutScreen extends StatelessWidget {
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
-                    colors: [Colors.transparent, Colors.black.withOpacity(0.5)],
+                    colors: [Colors.transparent, Colors.black.withAlpha(128)],
                   ),
                 ),
                 child: Padding(

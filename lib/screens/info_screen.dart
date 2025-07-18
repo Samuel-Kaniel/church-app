@@ -49,7 +49,7 @@ class InfoScreen extends StatelessWidget {
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
-                    colors: [Colors.transparent, Colors.black.withOpacity(0.7)],
+                    colors: [Colors.transparent, Colors.black.withAlpha(179)],
                   ),
                 ),
                 child: const Padding(

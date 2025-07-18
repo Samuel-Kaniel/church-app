@@ -41,7 +41,7 @@ dependencies:
   # UI components
   cached_network_image: ^3.3.1
   flutter_svg: ^2.0.10+1
-  carousel_slider: ^4.2.1
+  flutter_carousel_widget: ^2.2.0
   dots_indicator: ^3.0.0
   
   # Navigation

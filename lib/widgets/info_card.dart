@@ -32,7 +32,7 @@ class InfoCard extends StatelessWidget {
             gradient: LinearGradient(
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
-              colors: [Colors.black.withOpacity(0.7), Colors.transparent],
+              colors: [Colors.black.withAlpha(179), Colors.transparent],
             ),
           ),
           child: Padding(
