@@ -145,7 +145,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     const Text(
-                      'UPPER ROOM',
+                      'ST. MARY DAILY PRAYER',
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,

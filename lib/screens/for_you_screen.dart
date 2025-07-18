@@ -183,12 +183,12 @@ class ForYouScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     SvgPicture.asset(
-                      AppAssets.jesusIcon,
+                      AppAssets.crossLogo,
                       width: 100,
                       height: 100,
                       placeholderBuilder:
                           (context) => const Icon(
-                            Icons.person,
+                            Icons.church,
                             size: 100,
                             color: AppColors.primary,
                           ),
@@ -318,7 +318,7 @@ class ForYouScreen extends StatelessWidget {
                     ),
                     const SizedBox(width: 8),
                     const Text(
-                      'Welcome to Upper Room',
+                      'Welcome to St. Mary Daily Prayer',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 18,
@@ -333,7 +333,7 @@ class ForYouScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     const Text(
-                      'We\'re glad you\'re here! Upper Room is a vibrant Orthodox Christian Church dedicated to bringing the word of God into your hearts and minds.',
+                      'We\'re glad you\'re here! St. Mary Daily Prayer is a vibrant Orthodox Christian app dedicated to bringing the word of God into your hearts and minds.',
                       style: TextStyle(fontSize: 16),
                     ),
                     const SizedBox(height: 16),

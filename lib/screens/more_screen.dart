@@ -78,7 +78,7 @@ class MoreScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         const Text(
-                          'UPPER ROOM',
+                          'ST. MARY DAILY PRAYER',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 24,
@@ -194,7 +194,7 @@ class MoreScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   const Text(
-                    'Upper Room is a vibrant Orthodox Christian Church. Its mission is to bring the word of God from a timeless faith into your hearts and minds anywhere at anytime.',
+                    'St. Mary Daily Prayer is a vibrant Orthodox Christian app. Its mission is to bring the word of God from a timeless faith into your hearts and minds anywhere at anytime.',
                     style: TextStyle(
                       fontSize: 16,
                       color: AppColors.textPrimary,

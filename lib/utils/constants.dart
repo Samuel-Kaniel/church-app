@@ -10,7 +10,7 @@ class AppColors {
 }
 
 class AppStrings {
-  static const String appName = 'Upper Room';
+  static const String appName = 'St. Mary Daily Prayer';
   static const String home = 'Home';
   static const String kids = 'Kids';
   static const String forYou = 'For You';
@@ -43,7 +43,7 @@ class AppStrings {
 
   // About text
   static const String aboutText = '''
-Upper Room is a vibrant Orthodox Christian Church. Its mission is to bring the word of God from a timeless faith into your hearts and minds anywhere at anytime.
+St. Mary Daily Prayer is a vibrant Orthodox Christian app. Its mission is to bring the word of God from a timeless faith into your hearts and minds anywhere at anytime.
 
 The Orthodox Church worships God in continuity with the ancient Church, and is said to be the oldest Church. It is a balance between spirituality and theology, between the worship of God and service to humanity. Everything in Orthodoxy is a balance between spirituality and theology, between the worship of God and service to humanity.
 
@@ -52,7 +52,7 @@ The Orthodox Church worships God in spirit and in truth (John 4:24) and intentio
 }
 
 class AppAssets {
-  static const String logo = 'assets/images/jesus_icon.svg';
+  static const String logo = 'assets/images/cross_logo.svg';
   static const String crossLogo = 'assets/images/cross_logo.svg';
   static const String church = 'assets/images/church.jpg';
   static const String banner1 = 'assets/images/banner1.jpg';
