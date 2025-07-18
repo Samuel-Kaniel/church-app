@@ -9,30 +9,6 @@ class AppColors {
   static const Color divider = Color(0xFFEEEEEE);
 }
 
-class AppTextStyles {
-  static const TextStyle heading1 = TextStyle(
-    fontSize: 24,
-    fontWeight: FontWeight.bold,
-    color: AppColors.textPrimary,
-  );
-
-  static const TextStyle heading2 = TextStyle(
-    fontSize: 20,
-    fontWeight: FontWeight.bold,
-    color: AppColors.textPrimary,
-  );
-
-  static const TextStyle body = TextStyle(
-    fontSize: 16,
-    color: AppColors.textPrimary,
-  );
-
-  static const TextStyle caption = TextStyle(
-    fontSize: 14,
-    color: AppColors.textSecondary,
-  );
-}
-
 class AppStrings {
   static const String appName = 'Upper Room';
   static const String home = 'Home';
@@ -64,6 +40,15 @@ class AppStrings {
   static const String facebook = 'Facebook';
   static const String website = 'Website';
   static const String contactUs = 'Contact Us';
+
+  // About text
+  static const String aboutText = '''
+Upper Room is a vibrant Orthodox Christian Church. Its mission is to bring the word of God from a timeless faith into your hearts and minds anywhere at anytime.
+
+The Orthodox Church worships God in continuity with the ancient Church, and is said to be the oldest Church. It is a balance between spirituality and theology, between the worship of God and service to humanity. Everything in Orthodoxy is a balance between spirituality and theology, between the worship of God and service to humanity.
+
+The Orthodox Church worships God in spirit and in truth (John 4:24) and intentionally incarnates that truth in every age among all peoples of all walks of life to love God, others, and themselves.
+''';
 }
 
 class AppAssets {
@@ -71,4 +56,6 @@ class AppAssets {
   static const String church = 'assets/images/church.jpg';
   static const String banner1 = 'assets/images/banner1.jpg';
   static const String banner2 = 'assets/images/banner2.jpg';
+  static const String banner3 = 'assets/images/banner3.jpg';
+  static const String banner4 = 'assets/images/banner4.jpg';
 }

@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../models/menu_item.dart';
-import '../models/banner_item.dart';
 import '../utils/constants.dart';
 import '../widgets/menu_grid_item.dart';
-import '../widgets/banner_slider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -13,42 +11,103 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // Define menu items for the first design (sketch-like)
     final List<MenuItem> menuItems = [
-      MenuItem(title: AppStrings.sermons, icon: Icons.book, route: '/sermons'),
+      MenuItem(
+        title: AppStrings.sermons,
+        textColor: Colors.lightBlue,
+        onTap: () {
+          // Navigate to sermons screen
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(const SnackBar(content: Text('Sermons tapped')));
+        },
+      ),
       MenuItem(
         title: AppStrings.readings,
-        icon: Icons.menu_book,
-        route: '/readings',
+        textColor: Colors.orange,
+        onTap: () {
+          // Navigate to readings screen
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(const SnackBar(content: Text('Readings tapped')));
+        },
       ),
       MenuItem(
         title: AppStrings.music,
-        icon: Icons.music_note,
-        route: '/music',
+        textColor: Colors.lightBlue,
+        onTap: () {
+          // Navigate to music screen
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(const SnackBar(content: Text('Music tapped')));
+        },
       ),
       MenuItem(
         title: AppStrings.prayer,
-        icon: Icons.volunteer_activism,
-        route: '/prayer',
+        textColor: Colors.orange,
+        onTap: () {
+          // Navigate to prayer screen
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(const SnackBar(content: Text('Prayer tapped')));
+        },
       ),
       MenuItem(
         title: AppStrings.videos,
-        icon: Icons.video_library,
-        route: '/videos',
+        textColor: Colors.lightBlue,
+        onTap: () {
+          // Navigate to videos screen
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(const SnackBar(content: Text('Videos tapped')));
+        },
       ),
-      MenuItem(title: AppStrings.podcasts, icon: Icons.mic, route: '/podcasts'),
+      MenuItem(
+        title: AppStrings.podcasts,
+        textColor: Colors.orange,
+        onTap: () {
+          // Navigate to podcasts screen
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(const SnackBar(content: Text('Podcasts tapped')));
+        },
+      ),
     ];
 
     return Scaffold(
       appBar: AppBar(
         title: Row(
           children: [
-            SvgPicture.asset(AppAssets.logo, width: 24, height: 24),
+            SvgPicture.asset(
+              AppAssets.logo,
+              width: 24,
+              height: 24,
+              placeholderBuilder:
+                  (context) => const Icon(
+                    Icons.local_fire_department,
+                    color: AppColors.primary,
+                  ),
+            ),
             const SizedBox(width: 8),
             const Text(AppStrings.appName),
           ],
         ),
         actions: [
-          IconButton(icon: const Icon(Icons.search), onPressed: () {}),
-          IconButton(icon: const Icon(Icons.settings), onPressed: () {}),
+          IconButton(
+            icon: const Icon(Icons.search),
+            onPressed: () {
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(const SnackBar(content: Text('Search tapped')));
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.settings),
+            onPressed: () {
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(const SnackBar(content: Text('Settings tapped')));
+            },
+          ),
         ],
       ),
       body: SingleChildScrollView(
@@ -61,7 +120,17 @@ class HomeScreen extends StatelessWidget {
               child: Center(
                 child: Column(
                   children: [
-                    SvgPicture.asset(AppAssets.logo, width: 40, height: 40),
+                    SvgPicture.asset(
+                      AppAssets.logo,
+                      width: 40,
+                      height: 40,
+                      placeholderBuilder:
+                          (context) => const Icon(
+                            Icons.local_fire_department,
+                            color: AppColors.primary,
+                            size: 40,
+                          ),
+                    ),
                     const SizedBox(height: 8),
                     const Text(
                       'UPPER ROOM',
@@ -76,13 +145,31 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
 
+            // Welcome text
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              child: Center(
+                child: Text(
+                  'WELCOME\nhome',
+                  style: TextStyle(
+                    fontSize: 32,
+                    fontWeight: FontWeight.w300,
+                    height: 1.2,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 16),
+
             // Menu grid
             GridView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               padding: const EdgeInsets.all(16),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
+                crossAxisCount: 2,
                 childAspectRatio: 1.0,
                 crossAxisSpacing: 16,
                 mainAxisSpacing: 16,
@@ -91,39 +178,12 @@ class HomeScreen extends StatelessWidget {
               itemBuilder: (context, index) {
                 return MenuGridItem(
                   item: menuItems[index],
-                  onTap: () {
-                    // Navigate to the menu item's route
-                    // Navigator.pushNamed(context, menuItems[index].route);
-                  },
+                  isSketchStyle: true,
                 );
               },
             ),
           ],
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 0,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: AppStrings.home,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.child_care),
-            label: AppStrings.kids,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: AppStrings.forYou,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.more_horiz),
-            label: AppStrings.more,
-          ),
-        ],
-        onTap: (index) {
-          // Handle navigation
-        },
       ),
     );
   }

@@ -4,14 +4,9 @@ import '../utils/constants.dart';
 class ContactButton extends StatelessWidget {
   final String title;
   final IconData? icon;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
-  const ContactButton({
-    super.key,
-    required this.title,
-    this.icon,
-    required this.onTap,
-  });
+  const ContactButton({super.key, required this.title, this.icon, this.onTap});
 
   @override
   Widget build(BuildContext context) {
