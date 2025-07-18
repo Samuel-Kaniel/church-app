@@ -69,7 +69,3 @@ lib/
 ## License
 
 This project is proprietary and confidential.
-
-## Contact
-
-For any inquiries, please contact [your-email@example.com](mailto:your-email@example.com).
