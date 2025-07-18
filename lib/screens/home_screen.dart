@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../models/menu_item.dart';
 import '../utils/constants.dart';
-import '../utils/image_urls.dart';
 import '../services/url_service.dart';
 import '../widgets/menu_grid_item.dart';
 
@@ -20,7 +19,7 @@ class HomeScreen extends StatelessWidget {
           // Navigate to online Coptic sermons
           UrlService.openWebView(
             context,
-            ImageUrls.copticSermons,
+            'https://www.copticchurch.net/sermons',
             'Coptic Sermons',
           );
         },
@@ -32,7 +31,7 @@ class HomeScreen extends StatelessWidget {
           // Navigate to online Bible readings
           UrlService.openWebView(
             context,
-            ImageUrls.bibleGateway,
+            'https://www.biblegateway.com/',
             'Bible Readings',
           );
         },
@@ -44,7 +43,7 @@ class HomeScreen extends StatelessWidget {
           // Navigate to Coptic hymns on YouTube
           UrlService.openWebView(
             context,
-            ImageUrls.copticHymnsPlaylist,
+            'https://www.youtube.com/results?search_query=coptic+hymns',
             'Coptic Hymns',
           );
         },
@@ -56,7 +55,7 @@ class HomeScreen extends StatelessWidget {
           // Navigate to prayer video
           UrlService.openWebView(
             context,
-            ImageUrls.copticPrayerVideo,
+            'https://www.youtube.com/results?search_query=coptic+prayer',
             'Prayer',
           );
         },
@@ -68,7 +67,7 @@ class HomeScreen extends StatelessWidget {
           // Navigate to Coptic liturgy video
           UrlService.openWebView(
             context,
-            ImageUrls.copticLiturgyVideo,
+            'https://www.youtube.com/results?search_query=coptic+liturgy',
             'Coptic Liturgy',
           );
         },
@@ -80,7 +79,7 @@ class HomeScreen extends StatelessWidget {
           // Navigate to Coptic Church website
           UrlService.openWebView(
             context,
-            ImageUrls.copticChurchWebsite,
+            'https://www.copticchurch.net',
             'Coptic Church',
           );
         },

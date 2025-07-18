@@ -58,9 +58,10 @@ class MoreScreen extends StatelessWidget {
                 width: double.infinity,
                 height: 200,
                 decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(AppAssets.church),
-                    fit: BoxFit.cover,
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [Colors.blue.shade300, Colors.blue.shade700],
                   ),
                 ),
                 child: Container(
@@ -305,32 +306,19 @@ class MoreScreen extends StatelessWidget {
                 borderRadius: const BorderRadius.vertical(
                   top: Radius.circular(16),
                 ),
-                child: Image.network(
-                  ImageUrls.getRandomJesusImage(),
+                child: Container(
                   height: 300,
                   width: double.infinity,
-                  fit: BoxFit.cover,
-                  loadingBuilder: (context, child, loadingProgress) {
-                    if (loadingProgress == null) return child;
-                    return SizedBox(
-                      height: 300,
-                      child: Center(
-                        child: CircularProgressIndicator(
-                          value:
-                              loadingProgress.expectedTotalBytes != null
-                                  ? loadingProgress.cumulativeBytesLoaded /
-                                      loadingProgress.expectedTotalBytes!
-                                  : null,
-                        ),
-                      ),
-                    );
-                  },
-                  errorBuilder: (context, error, stackTrace) {
-                    return const SizedBox(
-                      height: 300,
-                      child: Center(child: Icon(Icons.error, size: 50)),
-                    );
-                  },
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [Colors.blue.shade300, Colors.blue.shade700],
+                    ),
+                  ),
+                  child: const Center(
+                    child: Icon(Icons.church, size: 80, color: Colors.white),
+                  ),
                 ),
               ),
               Padding(

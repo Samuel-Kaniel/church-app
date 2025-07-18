@@ -3,7 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../models/menu_item.dart';
 import '../models/banner_item.dart';
 import '../utils/constants.dart';
-import '../utils/image_urls.dart';
 import '../services/url_service.dart';
 import '../widgets/menu_grid_item.dart';
 import '../widgets/banner_slider.dart';
@@ -22,7 +21,7 @@ class KidsScreen extends StatelessWidget {
           // Navigate to kid-friendly sermons
           UrlService.openWebView(
             context,
-            ImageUrls.copticSermons,
+            'https://www.copticchurch.net/sermons',
             'Sermons for Kids',
           );
         },
@@ -34,7 +33,7 @@ class KidsScreen extends StatelessWidget {
           // Navigate to Coptic hymns on YouTube
           UrlService.openWebView(
             context,
-            ImageUrls.copticHymnsPlaylist,
+            'https://www.youtube.com/results?search_query=coptic+hymns',
             'Coptic Hymns',
           );
         },
@@ -68,19 +67,19 @@ class KidsScreen extends StatelessWidget {
     // Define banner items
     final List<BannerItem> banners = [
       BannerItem(
-        imageUrl: AppAssets.banner1,
+        imageUrl: 'placeholder1',
         title: 'HAVING PEACE IN ALL CIRCUMSTANCES',
         onTap: () {
-          // Show a random Jesus image
-          _showJesusImageDialog(context);
+          // Show a dialog
+          _showImageDialog(context);
         },
       ),
       BannerItem(
-        imageUrl: AppAssets.banner2,
+        imageUrl: 'placeholder2',
         title: 'WELCOME HOME',
         onTap: () {
-          // Show a random Jesus image
-          _showJesusImageDialog(context);
+          // Show a dialog
+          _showImageDialog(context);
         },
       ),
     ];
@@ -151,7 +150,7 @@ class KidsScreen extends StatelessWidget {
     );
   }
 
-  void _showJesusImageDialog(BuildContext context) {
+  void _showImageDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -166,32 +165,19 @@ class KidsScreen extends StatelessWidget {
                 borderRadius: const BorderRadius.vertical(
                   top: Radius.circular(16),
                 ),
-                child: Image.network(
-                  ImageUrls.getRandomJesusImage(),
+                child: Container(
                   height: 300,
                   width: double.infinity,
-                  fit: BoxFit.cover,
-                  loadingBuilder: (context, child, loadingProgress) {
-                    if (loadingProgress == null) return child;
-                    return SizedBox(
-                      height: 300,
-                      child: Center(
-                        child: CircularProgressIndicator(
-                          value:
-                              loadingProgress.expectedTotalBytes != null
-                                  ? loadingProgress.cumulativeBytesLoaded /
-                                      loadingProgress.expectedTotalBytes!
-                                  : null,
-                        ),
-                      ),
-                    );
-                  },
-                  errorBuilder: (context, error, stackTrace) {
-                    return const SizedBox(
-                      height: 300,
-                      child: Center(child: Icon(Icons.error, size: 50)),
-                    );
-                  },
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [Colors.orange.shade300, Colors.orange.shade700],
+                    ),
+                  ),
+                  child: const Center(
+                    child: Icon(Icons.church, size: 80, color: Colors.white),
+                  ),
                 ),
               ),
               Padding(
@@ -199,17 +185,14 @@ class KidsScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     const Text(
-                      'Jesus Christ',
+                      'St. Mary',
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     const SizedBox(height: 8),
-                    const Text(
-                      'The Son of God, our Savior',
-                      textAlign: TextAlign.center,
-                    ),
+                    const Text('Mother of God', textAlign: TextAlign.center),
                     const SizedBox(height: 16),
                     TextButton(
                       onPressed: () {

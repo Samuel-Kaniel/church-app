@@ -48,9 +48,18 @@ class _BannerSliderState extends State<BannerSlider> {
                 onTap: banner.onTap,
                 child: Container(
                   decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(banner.imageUrl),
-                      fit: BoxFit.cover,
+                    // Use gradient colors instead of images to avoid loading issues
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        index % 2 == 0
+                            ? Colors.blue.shade300
+                            : Colors.orange.shade300,
+                        index % 2 == 0
+                            ? Colors.blue.shade700
+                            : Colors.orange.shade700,
+                      ],
                     ),
                   ),
                   child: Container(

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../utils/constants.dart';
-import '../utils/image_urls.dart';
 import '../services/url_service.dart';
 
 class ForYouScreen extends StatelessWidget {
@@ -169,14 +168,12 @@ class ForYouScreen extends StatelessWidget {
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 16),
-                  ...infoCards
-                      .map((card) => _buildInfoCard(context, card))
-                      .toList(),
+                  ...infoCards.map((card) => _buildInfoCard(context, card)),
                 ],
               ),
             ),
 
-            // Jesus icon at the bottom
+            // Cross icon at the bottom
             Padding(
               padding: const EdgeInsets.all(24.0),
               child: Center(

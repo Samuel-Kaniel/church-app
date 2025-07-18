@@ -21,9 +21,11 @@ class InfoCard extends StatelessWidget {
         height: 100,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
-          image: DecorationImage(
-            image: AssetImage(imageUrl),
-            fit: BoxFit.cover,
+          // Use gradient colors instead of images to avoid loading issues
+          gradient: LinearGradient(
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+            colors: [Colors.blue.shade700, Colors.blue.shade300],
           ),
         ),
         child: Container(
