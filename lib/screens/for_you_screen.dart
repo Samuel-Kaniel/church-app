@@ -3,34 +3,45 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../utils/constants.dart';
 import '../utils/image_urls.dart';
 import '../services/url_service.dart';
-import '../widgets/info_card.dart';
 
 class ForYouScreen extends StatelessWidget {
   const ForYouScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // Define info cards
+    // Define info cards with their respective sections from the image
     final List<Map<String, dynamic>> infoCards = [
       {
         'title': AppStrings.whoIsJesus,
-        'imageUrl': AppAssets.banner2,
+        'description':
+            'Learn about Jesus Christ, His life, teachings, and significance in Christianity.',
+        'backgroundColor': const Color(0xFFF8F8F8),
+        'textColor': Colors.black,
         'webUrl': 'https://www.copticchurch.net/topics/thecopticchurch/jesus',
       },
       {
         'title': AppStrings.whatIsChristianity,
-        'imageUrl': AppAssets.banner1,
+        'description':
+            'Discover the core beliefs, values, and practices of the Christian faith.',
+        'backgroundColor': const Color(0xFFF5E8D5),
+        'textColor': Colors.black,
         'webUrl': 'https://www.copticchurch.net/topics/thecopticchurch/faith',
       },
       {
         'title': AppStrings.whatIsMyIdentity,
-        'imageUrl': AppAssets.banner3,
+        'description':
+            'Explore what it means to find your identity in Christ and as a child of God.',
+        'backgroundColor': const Color(0xFFD5E8F5),
+        'textColor': Colors.black,
         'webUrl':
             'https://www.copticchurch.net/topics/thecopticchurch/identity',
       },
       {
         'title': AppStrings.whatIsMyPurpose,
-        'imageUrl': AppAssets.banner4,
+        'description':
+            'Understand God\'s purpose for your life and how to fulfill your calling.',
+        'backgroundColor': const Color(0xFF483D8B),
+        'textColor': Colors.white,
         'webUrl': 'https://www.copticchurch.net/topics/thecopticchurch/purpose',
       },
     ];
@@ -40,7 +51,7 @@ class ForYouScreen extends StatelessWidget {
         title: Row(
           children: [
             SvgPicture.asset(
-              AppAssets.crossLogo,
+              AppAssets.logo,
               width: 24,
               height: 24,
               placeholderBuilder:
@@ -74,46 +85,76 @@ class ForYouScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Banner image
+            // Banner image with "I'm New" text
             GestureDetector(
               onTap: () {
-                _showJesusImageDialog(context);
+                _showWelcomeDialog(context);
               },
-              child: Container(
-                width: double.infinity,
-                height: 200,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(AppAssets.banner2),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                child: Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [Colors.transparent, Colors.black.withAlpha(179)],
+              child: Stack(
+                children: [
+                  Container(
+                    width: double.infinity,
+                    height: 200,
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [Color(0xFF87CEEB), Color(0xFFFFA07A)],
+                      ),
                     ),
                   ),
-                  child: const Padding(
-                    padding: EdgeInsets.all(16.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "I'm New",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 32,
-                            fontWeight: FontWeight.bold,
-                          ),
+                  Positioned.fill(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            Colors.transparent,
+                            Colors.black.withAlpha(100),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
                   ),
-                ),
+                  const Positioned(
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    child: Center(
+                      child: Text(
+                        "I'm New",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 40,
+                          fontWeight: FontWeight.bold,
+                          shadows: [
+                            Shadow(
+                              offset: Offset(1.0, 1.0),
+                              blurRadius: 3.0,
+                              color: Color.fromARGB(150, 0, 0, 0),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 16,
+                    left: 16,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        _showWelcomeDialog(context);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        foregroundColor: AppColors.primary,
+                      ),
+                      child: const Text('Get Started'),
+                    ),
+                  ),
+                ],
               ),
             ),
 
@@ -121,21 +162,53 @@ class ForYouScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
-                children:
-                    infoCards.map((card) {
-                      return InfoCard(
-                        title: card['title'],
-                        imageUrl: card['imageUrl'],
-                        onTap: () {
-                          // Navigate to the info card's detail page
-                          UrlService.openWebView(
-                            context,
-                            card['webUrl'],
-                            card['title'],
-                          );
-                        },
-                      );
-                    }).toList(),
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Explore Your Faith',
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 16),
+                  ...infoCards
+                      .map((card) => _buildInfoCard(context, card))
+                      .toList(),
+                ],
+              ),
+            ),
+
+            // Jesus icon at the bottom
+            Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: Center(
+                child: Column(
+                  children: [
+                    SvgPicture.asset(
+                      AppAssets.jesusIcon,
+                      width: 100,
+                      height: 100,
+                      placeholderBuilder:
+                          (context) => const Icon(
+                            Icons.person,
+                            size: 100,
+                            color: AppColors.primary,
+                          ),
+                    ),
+                    const SizedBox(height: 16),
+                    const Text(
+                      '"I am the way, the truth, and the life.\nNo one comes to the Father except through Me."',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontStyle: FontStyle.italic,
+                        fontSize: 16,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    const Text(
+                      '- John 14:6',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
@@ -144,7 +217,78 @@ class ForYouScreen extends StatelessWidget {
     );
   }
 
-  void _showJesusImageDialog(BuildContext context) {
+  Widget _buildInfoCard(BuildContext context, Map<String, dynamic> card) {
+    return Card(
+      margin: const EdgeInsets.only(bottom: 16),
+      elevation: 2,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      child: InkWell(
+        onTap: () {
+          UrlService.openWebView(context, card['webUrl'], card['title']);
+        },
+        borderRadius: BorderRadius.circular(12),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: card['backgroundColor'],
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(12),
+                ),
+              ),
+              child: Text(
+                card['title'],
+                style: TextStyle(
+                  color: card['textColor'],
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    card['description'],
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                  const SizedBox(height: 16),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      TextButton(
+                        onPressed: () {
+                          UrlService.openWebView(
+                            context,
+                            card['webUrl'],
+                            card['title'],
+                          );
+                        },
+                        child: const Row(
+                          children: [
+                            Text('Learn More'),
+                            SizedBox(width: 4),
+                            Icon(Icons.arrow_forward, size: 16),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _showWelcomeDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -155,36 +299,33 @@ class ForYouScreen extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              ClipRRect(
-                borderRadius: const BorderRadius.vertical(
-                  top: Radius.circular(16),
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(16),
+                decoration: const BoxDecoration(
+                  color: AppColors.primary,
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
                 ),
-                child: Image.network(
-                  ImageUrls.getRandomJesusImage(),
-                  height: 300,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                  loadingBuilder: (context, child, loadingProgress) {
-                    if (loadingProgress == null) return child;
-                    return SizedBox(
-                      height: 300,
-                      child: Center(
-                        child: CircularProgressIndicator(
-                          value:
-                              loadingProgress.expectedTotalBytes != null
-                                  ? loadingProgress.cumulativeBytesLoaded /
-                                      loadingProgress.expectedTotalBytes!
-                                  : null,
-                        ),
+                child: Row(
+                  children: [
+                    SvgPicture.asset(
+                      AppAssets.logo,
+                      width: 32,
+                      height: 32,
+                      placeholderBuilder:
+                          (context) =>
+                              const Icon(Icons.church, color: Colors.white),
+                    ),
+                    const SizedBox(width: 8),
+                    const Text(
+                      'Welcome to Upper Room',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
                       ),
-                    );
-                  },
-                  errorBuilder: (context, error, stackTrace) {
-                    return const SizedBox(
-                      height: 300,
-                      child: Center(child: Icon(Icons.error, size: 50)),
-                    );
-                  },
+                    ),
+                  ],
                 ),
               ),
               Padding(
@@ -192,23 +333,39 @@ class ForYouScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     const Text(
-                      'Jesus Christ with Mary',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    const Text(
-                      'The Son of God and His Mother',
-                      textAlign: TextAlign.center,
+                      'We\'re glad you\'re here! Upper Room is a vibrant Orthodox Christian Church dedicated to bringing the word of God into your hearts and minds.',
+                      style: TextStyle(fontSize: 16),
                     ),
                     const SizedBox(height: 16),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: const Text('Close'),
+                    const Text(
+                      'Explore our resources to learn more about Jesus, Christianity, and your purpose in God\'s plan.',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    const SizedBox(height: 24),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            UrlService.openWebView(
+                              context,
+                              'https://www.copticchurch.net/newcomers',
+                              'New to Orthodox Church',
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColors.primary,
+                          ),
+                          child: const Text('Learn More'),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text('Close'),
+                        ),
+                      ],
                     ),
                   ],
                 ),

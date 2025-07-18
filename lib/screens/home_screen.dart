@@ -92,7 +92,7 @@ class HomeScreen extends StatelessWidget {
         title: Row(
           children: [
             SvgPicture.asset(
-              AppAssets.crossLogo,
+              AppAssets.logo,
               width: 24,
               height: 24,
               placeholderBuilder:
@@ -133,14 +133,14 @@ class HomeScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     SvgPicture.asset(
-                      AppAssets.crossLogo,
-                      width: 40,
-                      height: 40,
+                      AppAssets.logo,
+                      width: 80,
+                      height: 80,
                       placeholderBuilder:
                           (context) => const Icon(
                             Icons.church,
                             color: AppColors.primary,
-                            size: 40,
+                            size: 80,
                           ),
                     ),
                     const SizedBox(height: 8),

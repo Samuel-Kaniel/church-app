@@ -52,11 +52,13 @@ The Orthodox Church worships God in spirit and in truth (John 4:24) and intentio
 }
 
 class AppAssets {
-  static const String logo = 'assets/images/logo.svg';
+  static const String logo = 'assets/images/jesus_icon.svg';
   static const String crossLogo = 'assets/images/cross_logo.svg';
   static const String church = 'assets/images/church.jpg';
   static const String banner1 = 'assets/images/banner1.jpg';
   static const String banner2 = 'assets/images/banner2.jpg';
   static const String banner3 = 'assets/images/banner3.jpg';
   static const String banner4 = 'assets/images/banner4.jpg';
+  static const String forYouBanner = 'assets/images/for_you_banner.jpg';
+  static const String jesusIcon = 'assets/images/jesus_icon.svg';
 }

@@ -15,7 +15,7 @@ class MoreScreen extends StatelessWidget {
         title: Row(
           children: [
             SvgPicture.asset(
-              AppAssets.crossLogo,
+              AppAssets.logo,
               width: 24,
               height: 24,
               placeholderBuilder:
