@@ -3,6 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../models/menu_item.dart';
 import '../models/banner_item.dart';
 import '../utils/constants.dart';
+import '../utils/image_urls.dart';
+import '../services/url_service.dart';
 import '../widgets/menu_grid_item.dart';
 import '../widgets/banner_slider.dart';
 
@@ -17,36 +19,48 @@ class KidsScreen extends StatelessWidget {
         title: AppStrings.sermons,
         icon: Icons.church,
         onTap: () {
-          ScaffoldMessenger.of(
+          // Navigate to kid-friendly sermons
+          UrlService.openWebView(
             context,
-          ).showSnackBar(const SnackBar(content: Text('Sermons tapped')));
+            ImageUrls.copticSermons,
+            'Sermons for Kids',
+          );
         },
       ),
       MenuItem(
         title: AppStrings.tunes,
         icon: Icons.music_note,
         onTap: () {
-          ScaffoldMessenger.of(
+          // Navigate to Coptic hymns on YouTube
+          UrlService.openWebView(
             context,
-          ).showSnackBar(const SnackBar(content: Text('Tunes tapped')));
+            ImageUrls.copticHymnsPlaylist,
+            'Coptic Hymns',
+          );
         },
       ),
       MenuItem(
         title: AppStrings.cartoons,
         icon: Icons.movie,
         onTap: () {
-          ScaffoldMessenger.of(
+          // Navigate to Christian cartoons
+          UrlService.openWebView(
             context,
-          ).showSnackBar(const SnackBar(content: Text('Cartoons tapped')));
+            'https://www.youtube.com/results?search_query=christian+cartoons+for+kids',
+            'Christian Cartoons',
+          );
         },
       ),
       MenuItem(
         title: AppStrings.learning,
         icon: Icons.school,
         onTap: () {
-          ScaffoldMessenger.of(
+          // Navigate to Bible for kids
+          UrlService.openWebView(
             context,
-          ).showSnackBar(const SnackBar(content: Text('Learning tapped')));
+            'https://bibleforchildren.org/',
+            'Bible for Children',
+          );
         },
       ),
     ];
@@ -57,18 +71,16 @@ class KidsScreen extends StatelessWidget {
         imageUrl: AppAssets.banner1,
         title: 'HAVING PEACE IN ALL CIRCUMSTANCES',
         onTap: () {
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(const SnackBar(content: Text('Peace banner tapped')));
+          // Show a random Jesus image
+          _showJesusImageDialog(context);
         },
       ),
       BannerItem(
         imageUrl: AppAssets.banner2,
         title: 'WELCOME HOME',
         onTap: () {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Welcome banner tapped')),
-          );
+          // Show a random Jesus image
+          _showJesusImageDialog(context);
         },
       ),
     ];
@@ -78,14 +90,12 @@ class KidsScreen extends StatelessWidget {
         title: Row(
           children: [
             SvgPicture.asset(
-              AppAssets.logo,
+              AppAssets.crossLogo,
               width: 24,
               height: 24,
               placeholderBuilder:
-                  (context) => const Icon(
-                    Icons.local_fire_department,
-                    color: AppColors.primary,
-                  ),
+                  (context) =>
+                      const Icon(Icons.church, color: AppColors.primary),
             ),
             const SizedBox(width: 8),
             const Text(AppStrings.appName),
@@ -138,6 +148,82 @@ class KidsScreen extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  void _showJesusImageDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ClipRRect(
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(16),
+                ),
+                child: Image.network(
+                  ImageUrls.getRandomJesusImage(),
+                  height: 300,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                  loadingBuilder: (context, child, loadingProgress) {
+                    if (loadingProgress == null) return child;
+                    return SizedBox(
+                      height: 300,
+                      child: Center(
+                        child: CircularProgressIndicator(
+                          value:
+                              loadingProgress.expectedTotalBytes != null
+                                  ? loadingProgress.cumulativeBytesLoaded /
+                                      loadingProgress.expectedTotalBytes!
+                                  : null,
+                        ),
+                      ),
+                    );
+                  },
+                  errorBuilder: (context, error, stackTrace) {
+                    return const SizedBox(
+                      height: 300,
+                      child: Center(child: Icon(Icons.error, size: 50)),
+                    );
+                  },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  children: [
+                    const Text(
+                      'Jesus Christ',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    const Text(
+                      'The Son of God, our Savior',
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 16),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text('Close'),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

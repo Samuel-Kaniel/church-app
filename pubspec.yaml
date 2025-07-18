@@ -38,9 +38,14 @@ dependencies:
   # UI components
   flutter_svg: ^2.0.10+1
   dots_indicator: ^3.0.0
+  cached_network_image: ^3.3.1
   
   # State management
   provider: ^6.1.2
+  
+  # Web and external links
+  url_launcher: ^6.2.5
+  webview_flutter: ^4.7.0
 
 dev_dependencies:
   flutter_test:

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../utils/constants.dart';
+import '../utils/image_urls.dart';
+import '../services/url_service.dart';
 import '../widgets/contact_button.dart';
 
 class MoreScreen extends StatelessWidget {
@@ -13,14 +15,12 @@ class MoreScreen extends StatelessWidget {
         title: Row(
           children: [
             SvgPicture.asset(
-              AppAssets.logo,
+              AppAssets.crossLogo,
               width: 24,
               height: 24,
               placeholderBuilder:
-                  (context) => const Icon(
-                    Icons.local_fire_department,
-                    color: AppColors.primary,
-                  ),
+                  (context) =>
+                      const Icon(Icons.church, color: AppColors.primary),
             ),
             const SizedBox(width: 8),
             const Text(AppStrings.appName),
@@ -50,39 +50,44 @@ class MoreScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Church image
-            Container(
-              width: double.infinity,
-              height: 200,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(AppAssets.church),
-                  fit: BoxFit.cover,
-                ),
-              ),
+            GestureDetector(
+              onTap: () {
+                _showJesusImageDialog(context);
+              },
               child: Container(
+                width: double.infinity,
+                height: 200,
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [Colors.transparent, Colors.black.withAlpha(128)],
+                  image: DecorationImage(
+                    image: AssetImage(AppAssets.church),
+                    fit: BoxFit.cover,
                   ),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      const Text(
-                        'UPPER ROOM',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 1.5,
+                child: Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [Colors.transparent, Colors.black.withAlpha(128)],
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        const Text(
+                          'UPPER ROOM',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 1.5,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -104,8 +109,10 @@ class MoreScreen extends StatelessWidget {
                     AppStrings.give,
                     Icons.volunteer_activism,
                     () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Give tapped')),
+                      UrlService.openWebView(
+                        context,
+                        'https://www.copticchurch.net/donate',
+                        'Donate',
                       );
                     },
                   ),
@@ -114,8 +121,10 @@ class MoreScreen extends StatelessWidget {
                     AppStrings.shop,
                     Icons.shopping_bag,
                     () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Shop tapped')),
+                      UrlService.openWebView(
+                        context,
+                        'https://www.copticbookshop.com/',
+                        'Coptic Bookshop',
                       );
                     },
                   ),
@@ -124,8 +133,10 @@ class MoreScreen extends StatelessWidget {
                     AppStrings.instagram,
                     Icons.camera_alt,
                     () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Instagram tapped')),
+                      UrlService.openWebView(
+                        context,
+                        'https://www.instagram.com/copticchurch/',
+                        'Instagram',
                       );
                     },
                   ),
@@ -134,8 +145,10 @@ class MoreScreen extends StatelessWidget {
                     AppStrings.facebook,
                     Icons.facebook,
                     () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Facebook tapped')),
+                      UrlService.openWebView(
+                        context,
+                        'https://www.facebook.com/CopticOrthodoxChurch/',
+                        'Facebook',
                       );
                     },
                   ),
@@ -144,8 +157,10 @@ class MoreScreen extends StatelessWidget {
                     AppStrings.website,
                     Icons.language,
                     () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Website tapped')),
+                      UrlService.openWebView(
+                        context,
+                        ImageUrls.copticChurchWebsite,
+                        'Coptic Church Website',
                       );
                     },
                   ),
@@ -154,8 +169,8 @@ class MoreScreen extends StatelessWidget {
                     AppStrings.contactUs,
                     Icons.email,
                     () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Contact Us tapped')),
+                      UrlService.launchExternalUrl(
+                        'mailto:contact@copticchurch.net',
                       );
                     },
                   ),
@@ -214,8 +229,8 @@ class MoreScreen extends StatelessWidget {
                     title: 'Email Us',
                     icon: Icons.email,
                     onTap: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Email Us tapped')),
+                      UrlService.launchExternalUrl(
+                        'mailto:contact@copticchurch.net',
                       );
                     },
                   ),
@@ -223,17 +238,15 @@ class MoreScreen extends StatelessWidget {
                     title: 'Call Us',
                     icon: Icons.phone,
                     onTap: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Call Us tapped')),
-                      );
+                      UrlService.launchExternalUrl('tel:+11234567890');
                     },
                   ),
                   ContactButton(
                     title: 'Visit Us',
                     icon: Icons.location_on,
                     onTap: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Visit Us tapped')),
+                      UrlService.launchExternalUrl(
+                        'https://maps.app.goo.gl/JGJKqLBtPgHMXvSS6',
                       );
                     },
                   ),
@@ -274,6 +287,82 @@ class MoreScreen extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  void _showJesusImageDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ClipRRect(
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(16),
+                ),
+                child: Image.network(
+                  ImageUrls.getRandomJesusImage(),
+                  height: 300,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                  loadingBuilder: (context, child, loadingProgress) {
+                    if (loadingProgress == null) return child;
+                    return SizedBox(
+                      height: 300,
+                      child: Center(
+                        child: CircularProgressIndicator(
+                          value:
+                              loadingProgress.expectedTotalBytes != null
+                                  ? loadingProgress.cumulativeBytesLoaded /
+                                      loadingProgress.expectedTotalBytes!
+                                  : null,
+                        ),
+                      ),
+                    );
+                  },
+                  errorBuilder: (context, error, stackTrace) {
+                    return const SizedBox(
+                      height: 300,
+                      child: Center(child: Icon(Icons.error, size: 50)),
+                    );
+                  },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  children: [
+                    const Text(
+                      'Jesus Christ with Angels',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    const Text(
+                      'The Son of God surrounded by heavenly hosts',
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 16),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text('Close'),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

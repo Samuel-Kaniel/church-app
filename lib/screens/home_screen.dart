@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../models/menu_item.dart';
 import '../utils/constants.dart';
+import '../utils/image_urls.dart';
+import '../services/url_service.dart';
 import '../widgets/menu_grid_item.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -15,60 +17,72 @@ class HomeScreen extends StatelessWidget {
         title: AppStrings.sermons,
         textColor: Colors.lightBlue,
         onTap: () {
-          // Navigate to sermons screen
-          ScaffoldMessenger.of(
+          // Navigate to online Coptic sermons
+          UrlService.openWebView(
             context,
-          ).showSnackBar(const SnackBar(content: Text('Sermons tapped')));
+            ImageUrls.copticSermons,
+            'Coptic Sermons',
+          );
         },
       ),
       MenuItem(
         title: AppStrings.readings,
         textColor: Colors.orange,
         onTap: () {
-          // Navigate to readings screen
-          ScaffoldMessenger.of(
+          // Navigate to online Bible readings
+          UrlService.openWebView(
             context,
-          ).showSnackBar(const SnackBar(content: Text('Readings tapped')));
+            ImageUrls.bibleGateway,
+            'Bible Readings',
+          );
         },
       ),
       MenuItem(
         title: AppStrings.music,
         textColor: Colors.lightBlue,
         onTap: () {
-          // Navigate to music screen
-          ScaffoldMessenger.of(
+          // Navigate to Coptic hymns on YouTube
+          UrlService.openWebView(
             context,
-          ).showSnackBar(const SnackBar(content: Text('Music tapped')));
+            ImageUrls.copticHymnsPlaylist,
+            'Coptic Hymns',
+          );
         },
       ),
       MenuItem(
         title: AppStrings.prayer,
         textColor: Colors.orange,
         onTap: () {
-          // Navigate to prayer screen
-          ScaffoldMessenger.of(
+          // Navigate to prayer video
+          UrlService.openWebView(
             context,
-          ).showSnackBar(const SnackBar(content: Text('Prayer tapped')));
+            ImageUrls.copticPrayerVideo,
+            'Prayer',
+          );
         },
       ),
       MenuItem(
         title: AppStrings.videos,
         textColor: Colors.lightBlue,
         onTap: () {
-          // Navigate to videos screen
-          ScaffoldMessenger.of(
+          // Navigate to Coptic liturgy video
+          UrlService.openWebView(
             context,
-          ).showSnackBar(const SnackBar(content: Text('Videos tapped')));
+            ImageUrls.copticLiturgyVideo,
+            'Coptic Liturgy',
+          );
         },
       ),
       MenuItem(
         title: AppStrings.podcasts,
         textColor: Colors.orange,
         onTap: () {
-          // Navigate to podcasts screen
-          ScaffoldMessenger.of(
+          // Navigate to Coptic Church website
+          UrlService.openWebView(
             context,
-          ).showSnackBar(const SnackBar(content: Text('Podcasts tapped')));
+            ImageUrls.copticChurchWebsite,
+            'Coptic Church',
+          );
         },
       ),
     ];
@@ -78,14 +92,12 @@ class HomeScreen extends StatelessWidget {
         title: Row(
           children: [
             SvgPicture.asset(
-              AppAssets.logo,
+              AppAssets.crossLogo,
               width: 24,
               height: 24,
               placeholderBuilder:
-                  (context) => const Icon(
-                    Icons.local_fire_department,
-                    color: AppColors.primary,
-                  ),
+                  (context) =>
+                      const Icon(Icons.church, color: AppColors.primary),
             ),
             const SizedBox(width: 8),
             const Text(AppStrings.appName),
@@ -121,12 +133,12 @@ class HomeScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     SvgPicture.asset(
-                      AppAssets.logo,
+                      AppAssets.crossLogo,
                       width: 40,
                       height: 40,
                       placeholderBuilder:
                           (context) => const Icon(
-                            Icons.local_fire_department,
+                            Icons.church,
                             color: AppColors.primary,
                             size: 40,
                           ),
